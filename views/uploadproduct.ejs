@@ -1,0 +1,519 @@
+<html>
+
+<head>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <title>BK Store</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <style>
+        .toppage{
+    border-radius : 0px 0px 5px 5px;
+    background-color: #7ff114;
+    height:45px;
+
+}
+.toppage_title{
+    padding-top: 1vh;
+    color: aliceblue;
+    font-size: medium;
+}
+.toppage_title:hover{
+    color:#7dbaf3;
+}
+.logo{
+    height: auto;
+    box-shadow: 0px 1px 3px #259915 ;
+
+}
+.search{
+    border-radius: 30px;
+    border: 2px solid #23e60a;
+    height:50px;
+    margin-top: 30px;
+    background-color: #ffffff;
+}
+.search_input{
+    border:0px solid #ffffff;
+    margin-top: 12px;
+    font-size: 130%;
+    width: 80%;
+}
+.button_input{
+    float:right;
+background-color: #ffffff;
+border: 0px solid #ffffff;
+font-size: 150%;
+margin-top: 12px;
+color: #23e60a;
+}
+.a{
+    margin-top: 50px;
+    font-size: 120%;
+}
+
+.b_login{
+    margin-left:30%;
+    border: 2px solid #01f801d8;
+    font-size: 150%;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+background-color: red;
+}
+.input_login{
+    border: 1px solid #4a8ae9;
+    border-radius: 10px;
+    font-size: 150%;
+    margin-left:10%;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+#login1{
+    border: 2px solid #23e60a;
+    border-radius: 20px;
+    margin-top: 15vh;
+    width: 600px
+}
+#name,#price,#img,#imgs1,#brand,#categories,#img2,#img3{
+   height: 30px;
+   margin-top:5px;
+   margin-left:10%;
+   border: 1px solid rgb(255, 192, 203);
+   border-radius: 10px;
+
+}
+label{
+    width: 150px;
+    font-size: 130%;
+    font-weight: 100;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+h1{
+    margin: 40px 0px 40px 20px;
+}
+textarea{
+    margin-top:5px;
+   margin-left:10%;
+   border: 1px solid rgb(255, 192, 203);
+   border-radius: 10px;
+width: 300px;
+height: 250px;
+ }
+
+        </style>
+
+    <script>
+        $(document).ready(() => {
+            $('#user').click(() => {
+                $('#u_login').show(500);
+                $('#user').removeAttr('placeholder')
+            });
+            $('#pass').click(() => {
+                $('#p_login').show(500);
+                $('#pass').removeAttr('placeholder')
+            });
+        });
+        function check() {
+            let user = document.formlogin.user.value;
+            let pass = document.formlogin.pass.value;
+            let userreglux = "([0-9]{10})";
+            let passreglux = "([a-zA-Z0-9]{6.100})";
+            if (user.length != 10) {
+                window.alert("ban sai sdt");
+            }
+            if (pass.length < 6) {
+                window.alert("mat khau khoong hop le");
+            }
+            else {
+                if (passreglux.match(user)) {
+                    // window.alert("mat khau khong hop le");
+                }
+                else {
+                    window.alert("mat khau ko hop le");
+                }
+            }
+
+        }
+    </script>
+
+
+
+    <div>
+        <div class="toppage">
+            <div class="col-xs-2"></div>
+            <h6 class="toppage_title col-xs-6">Chao mung ban den voi chung toi</h6>
+            <% if(!user){ %>
+            <h6 class="toppage_title col-xs-2"> <a href="/login"> Dang nhap</a></h6>
+            <h6 class="toppage_title col-xs-2"><a href="/singup"> Dang ky</a></h6>
+            <% } else{ %>
+            <h6 class="toppage_title col-xs-2"><a href="/user">Xin chao
+                    <%- user.name %> </a></h6>
+            <h6 class="toppage_title col-xs-2"><a href="/logout"> Dang xuat</a></h6>
+            <% } %>
+        </div>
+        <!-- logo -->
+
+        <div class="logo">
+            <div class="container">
+                <div class="col-xs-4">
+                    <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/14064080_1219397674759626_7148026115191155953_n.jpg?_nc_cat=109&_nc_ht=scontent.fhan2-3.fna&oh=ca32f16ced2e0f1e2af8ba61bb058d2e&oe=5C877768"
+                        width:100px height="200px"> </div>
+                <div class="col-xs-1"></div>
+                <div class="search col-xs-6 ">
+                    <form action="/product/search" method="post">
+                        <input type="text" name="search" class="search_input" placeholder="    Search any things..."
+                            value="" required>
+                        <button type="submit" class="button_input glyphicon glyphicon-search"></button>
+                    </form>
+                    <div>
+                        <a href="/">
+                            <h5 class="col-xs-3 a">Trang chu</h5>
+                        </a>
+                        <a href="/flashsale">
+                            <h5 class="col-xs-3 a">Flash Sales</h5>
+                        </a>
+                        <a href="/voucher">
+                            <h5 class="col-xs-3 a">Voucher</h5>
+                        </a>
+                        <a href="/bkmall">
+                            <h5 class="col-xs-3 a">BK Store Mall</h5>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!--end logo-->
+        <style>
+            ol {
+                box-shadow: 0px 3px 0px 0px #259915;
+                font-size: 150%;
+                margin-bottom: 30px;
+
+            }
+
+            .ab {
+                margin: 60px 0px 20px 0px;
+                height: 500px;
+            }
+
+            .ew {
+                height: 500px;
+                border: 1px solid greenyellow;
+                border-radius: 10px
+            }
+        </style>
+        <div class="container ">
+            <div class=" col-xs-3 ab">
+                <h3 style="margin-bottom: 40px">Danh muc nganh hang</h3>
+                <ol onclick="s('#test1')">Dien thoai</ol>
+                <ol onclick="s('#test2')">May tinh bang</ol>
+                <ol onclick="s('#test3')">Laptop</ol>
+                <ol onclick="s('#test4')">Phu kien</ol>
+            </div>
+            <div class=" col-xs-9 ab" id="test">
+                <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Sale-Stickers-PNG/Sale_Labels_PNG_Clipart_Image.png?m=1507172109"
+                    alt="" style="margin-left: 20px">
+            </div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-8 hidden ew ab" onmouseleave="f()" id="test1">
+
+                <br><br>
+                <h4 style="margin-left: 40%">Dien thoai</h4>
+
+
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Xiaomi_logo.svg/768px-Xiaomi_logo.svg.png"
+                        height="50px" alt="">
+                    <br> <a href="/product/phone/brand/xiaomi" style="margin-left: 4px"> Xiaomi</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZ4AAAB6CAMAAAC4AMUdAAAAnFBMVEX///8CT6EASJ4ARJ0ASp8ATaBskcIARp4APpsAQpyHoMrJ1ecAQZxlisAAPZrZ4+8/crPm7fTt8viluddTf7m7zOPA0ea1x+EAOpo6bbH2+fzP2uobWqetwdyBnMji6fKOqc8rYaqYrNBIeLZdhb13k8KAnMcAMZdVe7UAVKSftdU2ZawvZKsWXKlHb6+Vqs8ALJZgi8Fmk8ZRdLJautkQAAAPGElEQVR4nO1c22Liug4lFzcJBFKgUAiXQKGdwpR2z5n//7eTm5Ml2+Gyw0z3g9ZTSxzH1rItWZLd6TAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwG4+9glCRRimQ4+u6WXEA8GsXxdzfCiLRladvuX2807n8u3dBPEYjl58Mquf837oDhdNP/Pd+eTtufn/u35+i72wOIVuv3z+1yuTx9fO67k3vKbzy3HdsVwsohhGsH7uNzY/G3ByNMRRe/9HK/SM1HQ02/hqa64vGjFXhZOzO4thfY266p5MZcFfmZrhB6I/oLcyd+GYfEaLO1A8+Fprnz8Z1m0eQQuCUzNYQbbJsG58w2wHNMA+Z5oJcM9ljiw9NLzExffnEcV22k8PwHXQo7x1jVHH+mtO4DrZEw2ibQ4UFPb1n8GnpCqPJzvK8G+d2Eh4HGTQF3MDa+EA2MxR1DwzsrRy8o5ljCM1Tl6/REH6G5lZ61UMs+ucaqHuHnAaWnrxJviUP9tAefNvSyZ3lmCQbb9kvcU2DudobQyM8K3oB2OUdD2bGjlxVLGPBDz1BVqEl8ITQBVu95qsTuQY/l1G04T8+z3zC80wHuah25Ea9n2El7blplujDgT9CWvqHssaZHnKRuc6HWnvy+WNZVhaoMEn31hVZaigK6Dz0v1dOFDz+rTes1zOpCJla7+dPzz1RuWfaj4Z153Rf3f4dKbu7cUPZYUyl28i+UfjW9TvOagXCqftI+20plYNyFHvezenqOnnh5ZuCkTds1y/4K/CTtcj3Hs8nnBobZ6dQlnEk95sXBsF96qelxf0kCPFgGX0vBu/1HoGdCa1nRQeTaLhXnjI7Ru9BjiarS6Aw9XYNyJQJsNoAvY0GWNm+3WR33ZB3x1to7CbwTxFvgyrASbmp67LWkwgarSMrMe9nVIgqUPs1Rep71/tD/dEgrN6T4fegJq0ZEzbpndCCj2QudMKAj3rSmXIs12k1u0Z4IvyhO2jvTmp5UyYMogpX+AdBT9pvkyv1dF5D0OhOgx6E1RTijvX0u2R5p5Qcpfx96al16hp4Vah7X6vai6JkaW4MW2uc3NMuTuhCXWsvX3sH16hPl773pH0B61tOyL2JbmW5JLS+kh1qMaJ1Xo3ERAD8uKd+KnoN8uzYwI5C3Qs8DKEWxLJkY484jMO9OrsEI9BrYP0haqG3L93WLUp0MonPf9S+8IT3Dsqywq0oX8nXRaabnFeZ4ve5BO6DCDK3osVeyXl/q3QiGh0IPrO3wKZyMttGbchWGsIKLbfUzLnmhplCgRV4X7UqYFBVeaxl6b5WVU3W82kOl8xDpoVuo9/oJGOWg1pQNQCt6nOhDWjDd8mkC205KTwxTGLQM2hItlE8C1QA93XP0DOtn2VAewkQOdAfYA9LT+XRV8cvZZb8iPd4LqQRms6jtKdxS3ZGeMJFDqvJuJHYTPdj7is2MNZCrrr2vBbJs1XbxWXrQ2AvSWQAN1LYrKj3yv1pLyRUqJQzp2ZBK0HCrN/N/jJ7K9pGFcFNM6SE7IpjyIFZhmWV/BRLUYV614K9noYT/Q6VnDLZKNpRP0PSXjgrod8qJ3IO6T+XjWG6FwsUZej7RgKmYfZk5EsHsfvT4USxHpzQgm+mZok1XK8zYQjRJ/yKGuMepl/Wkt6jQU/UJzIdc2exBq+pasE9mz6LseDXhR/Khm6BQYZ3IALrHEoGcotEzgLSyHT2L6nvS1knQs0jomTTQk22cS9jUqrwFuKnM7J/J5VdQEbiZy+cLNPSHVnpPZD6Ufs+wFKfcUYif8Rl63ohXOzRsryjaLW6LyhoVYfEU1e1V9HT2TzVI+OQ27IkvS/hvF0NIaIvnswU3JaH2uiLzk2K6PUvD7YkWpTuoCXXb+q8Xou3t6Ol1RrPy73KmDg+30nMnrGjHhbe95CJKgI3cwELt6GseuneqUCpLoJwB0jjOqMOJRl1JI8Xr6C3PT6C29FS2SNmOb6MnPig9F878fIgCG5R7LuMZ/KCJTaFHehyk7peqKZiQmey90loelJidCOam2J9EO3qmdTPLzQY61v4qPdRnlMMd7M5lWKDRXZiz0Hbdgfqb0iNtVql0S8NN2BG1MRR6Rre1shU92UiR8eC8XXRB/7v0dPq6Q9wNH5rdeH10peSqBnqt75A/KT3DcqqVoeJYurcOMXWsKPSYIpKu329qZTt6suVdOg6Kvcw30tN5NAT7Pa/bYCOgrVfKGPw2wlHLIz1ZZkRYvj7Ln8p9V04r0qMFXjehxo/lOQ2tbOfUyRZo6dYqZvnodAM9kQazJK9EvDNFY50G7YvLjFtEAjfoY1AHNIRAc0NCiqhwRsje5bPlLD2djSGsKxpshPb0VJ7E3JVCgloX6Il/eApmzbK/Cg+mXAYRvpvMV4ysl5rmGaw/Ncyp0SNVV+F4filX1jxSBPtd17BXWPmmiGa4M7SyHT2ZlKvlLMitnxvo6cwEhSEkcyNWrimUbxtcaOjokuE39KuqqV3xT4UeuUsqCkpGcoMc6TGEJjrJ1hQ3tn19L92OniP+kNuQ8cct9KgtbE1PZ/hkWNrTivU8OlA0MqMDdyWVM60EdizPMJBO2KKgfDrLdMgletKpZ5uyqfyNWu4O9DxLd8Yp/n560uacHJ0gEXbVcugFmhXrCrEWtrQ4WRayfsdl6KTwupWDorAxgHm3Ib8lejeswyJUzflW9BTBjKHA939+Nz2d+MvXcx2FNn8wQBSUv6HHUkk5IyZpPiylMhJxbWYXUX2kx5S/VchjGegEhRtaqB09G1I4X4Xn305PKsqHUFs7xIzuzjFAVDlAyYJHfQ6EnjEUzjd80h1fBCLQQD8TYTwKfRgprbwHPVLJ5jb/DfTE/2QRDmzhnehJhf8UqARhqnFHScqQ1i+kGqp7M+IOGWO3nWn9d2GDvKLr+4xrNu7a6lZNaeU96KkMnmwJh93bxdkzmaYAZXU/etLx/KGuHdSNhi4dRy58GJNSQj46PTItNVvipTEwyJXY+kp6UtH1VUuG5nC1o6fUt3IrmlV9Cz055n+Gnk784tEJRNUA9rASSQScYQpbR4mU5M0flXH7bO6VjmGxzMtCVMeUVEIwXdIJRG2Ju9Ajd9v2nngOv5eeVNgn2nOSmkvWVNlx9LeLJdkmDuGFIoggjdQshbkMzpVmNNJzuhR3ivfEi0ATiNvRU8aaFjLQL76NnhHxDUmR7HD7R7IsItDKIqgkAnanFRC3TqLRI+MGYhnLBJhyvMLCSY6YdOIpQsq1S3xRJBekHT3STJfrckrIN9HT/eFXGNTpFNgPcpxgiglC9QIESRyQmZyBJFEU9JSLhnATmfNTqjfUawekJ4FW+j8qLfOGo4hYjO3SEKW3/LUOFb5/Dz3ozSxjGxkiQg84TV5Qy9Q7e7SsaZoASeB7Jj0KF9IMLCWI9AhCD662dfo17uUL35jEfeiZlMtnauX/t+jBoA45LYCpCRDRxCNwNvFmYui7rEgukM64VDZSb2Bj3CvoIS+QMw3X0ENd6yZ6ZBaRcIf7JnoaEqkIPWGz/C+giR7ScRiXqGQgk7NhzUuRQPNLCcpMXrtbdlqecyJJudfQgxkiZPbs70JPnRjxDMP1ujREpMduFP8lXEMP6B400TAlFC0GK0QbCr0MUoLlJkLsSrLlVukL91SUHlzFzPSQ446YgQ7ZKSizGY1DwBv1uRG5+Lr9h6bZMwQXDuZOwnavRRIvhgfwrCsqE/iZHNYCEy3G8zdEUCZ6qspJwJjSQzjGzRNOWjKI0DTAvDiYbaSV1HI3hgKlXSO2u8YUeEyZrbP8SAp8o//wIlCzYcdhEcNzuuSYNe40Tmg/4+kCbKe0MZTkrTxROwPaHWRwk2RJsEjAYEztQHjhaDoPRMKG6pA2R2qls0A0ZuoQD349sXEZNZwvvBYYSYMdJabvCLBx8ZyN+An1oGVN0jgWqHtKehZqVK2ULNIzIGsPcYk70giYYGvIRgkVthVsyr5izpgajkV66kfVfG5M4qXHr8oBnryjsgz//eFSYpta7rYYx+SqCJybeCyLRMyITYyZvBj7lrNnRA8XVyEi9KxSzf1C9snhJlaLK/G7mLjkgvfpKI425LSwmqyPuqemRxtIlkbPM44E4Yin9cPcwdizCFrc3ULOllpi8PG67h9o5+q1CqMDdM6SbDm086emPAR61LwKsDbTk9AQgudvH7c+cdorx1rRdMui8rOBTyQt1AtmkB5g2nAoXqEnPtEirm3T61vUjMqbENGRnJpvysF5AUoarWR6OpdcvYA3rmg5pbnwSGZDZfAgPcqtLU9E3JmqUZot6BC9cFuDsjnrNNJDR2/RbyU9dXzu2o7sU63unVDTY1UE4AQgEznAZqJ9SXaIJItHWuJkrap3LGh4KMnaSfO9KEXV6n0xT2evqdAvO0F6wOduuPFDuxVkd1aCWstuQ2yd7biLrmOySxKkh7jSoFvHSA+xF2tRnaGnczTfsiS/qAVXh+oFUQR68kgDPR19WGj0jA6m/JQSwb8/91sg0W7hAtArYdDVQ02lDpoYaEyQ0yWSnhEJx1enk5Ae7VKdtTGVqIBniA4tvMZuidBwSgzoeTT/XkK/8mj0YciiKb7kt1E8BaJl4+z0TmSKoBYkdjVlDk/rocirY20d7HO9LxmbqKzw1TSMRGDKREy71SA0N9DSj0j7SZ64fkIg0OhJx45tujFMOIeLB8WugCkFJIPt90m/R5ieGlLlupnVjxy/nnJH+H1WiXwX1r/6lQU4xrL6ZmExN6aJOqJhdR+tPUPqke0bj578akhDUTYBVsOtddGDHSgmle0vv+50J+ti7zuKLeQ6/pOy/ifrbo03mpvZw2frmp4p/L6upuIz/toz1bFWdXeGyc4P6GFYb7DcNMsg6R5mTnUFZ1Y8DJ/M5zPzK1ol8MFIg/lbo3H/MAsDJxueTuAPtq+TO974OjzuQj90iqEbhP7g8Wi8zvObMVqlQvDDMAzC0J95j1+XbrNbHPvbYJZHGwfWrntPkekYTsbHr27367ha/InLeKerl2zkfq0m/6UbbjUki+lkMu1F14tgNEz+xO3FDAaDwWAwGAwGg8FgMBgMBoPBuBn/B6MdCLgBN002AAAAAElFTkSuQmCC"
+                        height="50px" alt="">
+                    <br>
+                    <a href="/product/phone/brand/samsung" style="margin-left: 44px">Samsung</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?201606271147"
+                        height="50px" alt="">
+                    <br>
+                    <a href="/product/phone/brand/apple" style="margin-left: 6px">Apple</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0014/5569/brand.gif?itok=ibwl8M_8"
+                        height="50px" alt=""> <br>
+                    <a href="/product/phone/brand/huawei" style="margin-left: 4px">Huawei</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Bkav_logo.jpg" height="50px" alt="">
+
+                    <br>
+                    <a href="/product/phone/brand/bphone" style="margin-left: 34px">Bphone</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://www.skymartbw.com/wp-content/uploads/2010/04/others-logo.png" height="50px" alt="">
+                    <br>
+                    <a href="/product/category/phone" style="margin-left: 16px">All</a></div>
+
+            </div>
+            <div class="col-xs-8 hidden ew ab" onmouseleave="f()" id="test2">
+
+                <br><br>
+                <h4 style="margin-left: 40%">May tinh bang</h4>
+
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="data:image/png;base64,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"
+                        height="50px" alt="">
+                    <br>
+                    <a href="/product/tablet/brand/samsung" style="margin-left: 44px">Samsung</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?201606271147"
+                        height="50px" alt="">
+                    <br>
+                    <a href="/product/tablet/brand/apple" style="margin-left: 6px">Apple</a></div>
+
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://www.skymartbw.com/wp-content/uploads/2010/04/others-logo.png" height="50px" alt="">
+                    <br>
+                    <a href="/product/category/tablet" style="margin-left: 16px">All</a></div>
+
+
+            </div>
+            <div class="col-xs-8  hidden ew ab" onmouseleave="f()" id="test3">
+                <br><br>
+                <h4 style="margin-left: 40%">Laptop</h4>
+
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Xiaomi_logo.svg/768px-Xiaomi_logo.svg.png"
+                        height="50px" alt="">
+                    <br> <a href="/product/laptop/brand/xiaomi" style="margin-left: 4px"> Xiaomi</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="data:image/png;base64,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"
+                        height="50px" alt="">
+                    <br>
+                    <a href="/product/laptop/brand/samsung" style="margin-left: 44px">Samsung</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?201606271147"
+                        height="50px" alt="">
+                    <br>
+                    <a href="/product/laptop/brand/apple" style="margin-left: 6px">Apple</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/0014/5569/brand.gif?itok=ibwl8M_8"
+                        height="50px" alt=""> <br>
+                    <a href="/product/laptop/brand/huawei" style="margin-left: 4px">Huawei</a></div>
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Dell_logo_2016.svg/1200px-Dell_logo_2016.svg.png"
+                        height="50px" alt="">
+
+                    <br>
+                    <a href="/product/laptop/brand/dell" style="margin-left: 12px">Dell</a></div>
+
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://banner2.kisspng.com/20180618/jyu/kisspng-laptop-logo-asus-zenfone-3-zoom-ze553kl-asus-logo-5b27bbc679dfd7.7404706415293306304992.jpg"
+                        height="50px" alt="">
+
+                    <br>
+                    <a href="/product/laptop/brand/asus" style="margin-left: 30px">Asus</a></div>
+
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="http://logok.org/wp-content/uploads/2014/06/Acer-logo-880x633.png" height="50px" alt="">
+
+                    <br>
+                    <a href="/product/laptop/brand/xiaomi" style="margin-left: 16px">Acer</a></div>
+
+
+
+                <div class="col-xs-4" style="margin-top:50px">
+                    <img src="https://www.skymartbw.com/wp-content/uploads/2010/04/others-logo.png" height="50px" alt="">
+                    <br>
+                    <a href="/product/category/laptop" style="margin-left: 16px">All</a></div>
+
+            </div>
+            <div class="col-xs-8  hidden ew ab" onmouseleave="f()" id="test4">
+
+                <div>
+                    <br><br>
+                    <h4 style="margin-left: 40%">Phu kien</h4>
+                    <div class="col-xs-4" style="margin-top:50px">
+                        <img src="https://cdn.pixabay.com/photo/2014/04/03/10/06/headphones-309805_960_720.png" height="50px"
+                            alt="">
+                        <br>
+                        <a href="/product/other">Tai nghe</a></div>
+                    <div class="col-xs-4" style="margin-top:50px">
+                        <img src="https://metrophone.vn/wp-content/uploads/2017/09/Cu-sac-dien-thoai-2A-Bagi-Samsung-IPhone-Nokia-05.jpg"
+                            height="50px" alt="">
+                        <br>
+                        <a href="/product/other">Sac</a></div>
+                    <div class="col-xs-4" style="margin-top:50px">
+                        <img src="https://stcv4.hnammobile.com/uploads/products/colors/0/op-lung-world-cup-2018-2634307449-jpg.jpg"
+                            height="50px" alt="">
+                        <br>
+                        <a href="/product/other">Oplung</a></div>
+
+                    <div class="col-xs-4" style="margin-top:50px">
+                        <img src="https://www.skymartbw.com/wp-content/uploads/2010/04/others-logo.png" height="50px"
+                            alt="">
+                        <br>
+                        <a href="/product/ohter" style="margin-left: 16px">All</a></div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <script>
+            let id = ['#test1', '#test4', '#test3', '#test2', '#test'];
+            function remove(id, s) {
+                for (let i = 0; i < id.length; i++) {
+                    console.log(typeof (id[i]) + "   " + typeof (s))
+                    if (id[i] == s) {
+                        $(id[i]).removeClass('hidden');
+                    }
+                    else {
+                        $(id[i]).addClass('hidden')
+
+                    }
+                }
+            }
+            function s(s) {
+                remove(id, s);
+            }
+            function f(s) {
+                remove(id, '#test');
+            }
+
+        </script>
+        <!--login-->
+
+        <div class="container " id="login1">
+
+            <form method="POST" id="formSignUp">
+                <h1>Dang san pham</h1>
+                <label for=""> Ten sap pham</label>
+                <input type="text" name="name" placeholder="   Ten sp" id="name" ><br>
+                <label for=""> Price</label>
+                <input type="text" name="price" placeholder="   price" id="price" ><br>
+                <label for=""> So luong</label>
+                <input type="number" name="state" placeholder="   so luong" id="img"><br>
+
+ <label for=""> Img avata</label>
+                <input type="text" name="img1" id="img" placeholder="URL img">
+<div>
+                <label for=""> Img2 (50kb)</label>
+                <input type="file" onchange="previewFile()"><br>
+                <img src="" id="img1" class="hidden" height="200" alt="Image preview...">
+                <input style="margin-left: 225px" type="text" id="imgs1" name="img2" value="">
+</div>
+                <script>
+
+                    function previewFile() {
+
+
+
+                        var preview = document.querySelector('#img1'); //selects the query named img
+
+
+                        var file = document.querySelector('input[type=file]').files[0]; //sames as here
+                        var reader = new FileReader();
+
+                        reader.onloadend = function () {
+                            preview.src = reader.result;
+                            $('#imgs1').val(preview.src);
+                        }
+
+                        if (file) {
+                            reader.readAsDataURL(file); //reads the data as a URL
+                        } else {
+                            preview.src = "";
+                        }
+                        $('#img1').removeClass('hidden');
+                    }
+
+                </script>
+                <br><br>
+
+
+
+                <label for=""> Img3</label>
+                <input type="text" name="img3" id="img3" placeholder="URL img">
+                <br><br>
+                <label for=""> Brand</label>
+                <input type="text" name="brand" placeholder="   brand" id="brand" ><br>
+                <label for=""> Category</label>
+                <!-- <input type="text" name="categories" placeholder="   categories" id="categories" required><br> -->
+                <select name="categories"  id="categories">
+                    <option value="phone">Dien thoai</option>
+                    <option value="tablet"> May tinh bang</option>
+                    <option value="laptop"> Laptop</option>
+                    <option value="other"> Phu kien</option>
+
+                </select>
+                <br>
+                <label for=""> Described</label>
+                <textarea name="described" id="described"></textarea><br>
+                <button type="submit"> Dang San pham</button>
+            </form>
+            <h5> Neu ban quen mat khau, vui long bam <a href="/forgetpass">vao day.</a></h5>
+        </div>
+    </div>
+    <script>
+
+
+    </script>
+    <style>
+        .button_page {
+            background: #a1f750f3;
+            height: 330px;
+            margin-top: 30px;
+        }
+
+        .b {
+            margin-top: 20px;
+
+        }
+
+        p {
+            font-size: 130%;
+        }
+    </style>
+
+    <div class="button_page">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-3 b">
+            <h4>Gioi thieu ve Bkstore</h4>
+            <p>Day la du an duoc phat trien tren BTL mon Thiet ke va lap trinh web.Trang web mo phonng
+                mot trang thuong mai dien tu voi cac chuc nang chinh va chua duoc hoan chinh, moi ddong gop va y kien
+                de
+                xay dung
+                trang web tot hon, vui long gui vao email : <a href="">dunguyen20091998@gmail.com</a>
+            </p>
+        </div>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-1 b">
+            <h4>Cac dich vu giao hang</h4>
+            <img src="http://static.insidev2.ghn.vn/9d146c1c0cd90296cecc32948d24731ebca3b737/assets/images/GHN_Logo.png"
+                alt="" height="60px"><br><br>
+            <img src="http://thanhnien.vnpost.vn/static/img/vnpost.png" alt="" height="60px"><br><br><br>
+            <img src="https://giaohangtietkiem.vn/wp-content/uploads/2015/10/logo.png" height="60px" alt="">
+        </div>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-1 b">
+            <h4>Phuong thuc thanh toan</h4>
+            <img src="https://i2.wp.com/scentfie.com/wp-content/uploads/2017/11/Cash-On-Delivery-Logo.jpg?resize=366%2C144"
+                alt="" height="60px"><br><br>" <br><br>
+        </div>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-1 b"><a href="">Bkstore.herokuapp.com</a></div>
+
+    </div>
+</body>
+
+</html>

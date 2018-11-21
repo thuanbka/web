@@ -1,0 +1,313 @@
+<html>
+
+<head>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <title>BK Store</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <style>
+        .toppage{
+    border-radius : 0px 0px 5px 5px;
+    background-color: #7ff114;
+    height:45px;
+
+}
+.toppage_title{
+    padding-top: 1vh;
+    color: aliceblue;
+    font-size: medium;
+}
+.toppage_title:hover{
+    color:#7dbaf3;
+}
+.logo{
+    height: auto;
+    box-shadow: 0px 1px 3px #259915 ;
+
+}
+.search{
+    border-radius: 30px;
+    border: 2px solid #23e60a;
+    height:50px;
+    margin-top: 30px;
+    background-color: #ffffff;
+}
+.search_input{
+    border:0px solid #ffffff;
+    margin-top: 12px;
+    font-size: 130%;
+    width: 80%;
+}
+.button_input{
+    float:right;
+background-color: #ffffff;
+border: 0px solid #ffffff;
+font-size: 150%;
+margin-top: 12px;
+color: #23e60a;
+}
+.dh{
+    margin-top: 50px;
+    text-align: center;
+}
+.a{
+    margin-top: 50px;
+    font-size: 120%;
+}
+.dathang{
+    background: #e8e8e8;
+    margin: 50px;
+    border: 1px solid greenyellow;
+    border:12px;
+
+}
+#sp{
+    border: 1px solid yellowgreen;
+    width: 90%;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px
+
+}
+#sp1{
+    border: 1px solid yellowgreen;
+    width: 77%;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px
+
+}
+        </style>
+
+    <script>
+        let b=`<%- product.state %>`; let r=`<%- product.price %>`;
+        console.log(typeof(b));
+         let e=parseInt(b);
+         let u=parseInt(r);
+         console.log(typeof(e)+e);
+function s(){
+    let a= document.getElementById('soluong').value;
+    console.log(a);
+  if(a>e){
+      a=e;
+      document.getElementById('soluong').value=a;
+  }
+  if(a<0){
+      a=0;
+      document.getElementById('soluong').value=0;
+  }
+  document.getElementById('price').innerHTML=a*u;
+
+}
+
+    </script>
+
+
+
+    <div>
+        <div class="toppage">
+            <div class="col-xs-2"></div>
+            <h6 class="toppage_title col-xs-6">Chao mung ban den voi chung toi</h6>
+            <% if(!user){ %>
+            <h6 class="toppage_title col-xs-2"> <a href="/login"> Dang nhap</a></h6>
+            <h6 class="toppage_title col-xs-2"><a href="/singup"> Dang ky</a></h6>
+            <% } else{ %>
+            <h6 class="toppage_title col-xs-2"><a href="/user">Xin chao
+                    <%- user.name %> </a></h6>
+            <h6 class="toppage_title col-xs-2"><a href="/logout"> Dang xuat</a></h6>
+            <% } %>
+
+        </div>
+        <!-- logo -->
+
+        <div class="logo">
+            <div class="container">
+                <div class="col-xs-4">
+                    <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/14064080_1219397674759626_7148026115191155953_n.jpg?_nc_cat=109&_nc_ht=scontent.fhan2-3.fna&oh=ca32f16ced2e0f1e2af8ba61bb058d2e&oe=5C877768"
+                        width:100px height="200px">
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="search col-xs-6 ">
+                    <form action="/product/search" method="post">
+                        <input type="text" class="search_input" name="search" placeholder="    Search any things..."
+                            value="" required>
+                        <button type="submit" class="button_input glyphicon glyphicon-search"></button>
+                    </form>
+                    <div>
+                        <a href="/">
+                            <h5 class="col-xs-3 a">Trang chu</h5>
+                        </a>
+                        <a href="/flashsale">
+                            <h5 class="col-xs-3 a">Flash Sales</h5>
+                        </a>
+                        <a href="/voucher">
+                            <h5 class="col-xs-3 a">Voucher</h5>
+                        </a>
+                        <a href="/bkmall">
+                            <h5 class="col-xs-3 a">BK Store Mall</h5>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container ">
+            <div class="dathang">
+                <h3 class="dh">Dat hang(luu y ban chi dat hang thanh cong sau khi dang nhap)</h3>
+                <h3>Thong tin don dat hang</h3>
+                <form style="margin-left: 5%" method="POST">
+                    <h4 style="margin-left: 5%">Thong tin san pham</h4>
+                    <div class="container" id="sp">
+
+                        <div style="margin-left:15%">
+                            <h4 class="col-xs-3">Ten san pham:</h4>
+                            <h4>
+                                <%- product.name %>
+                            </h4>
+
+                        </div>
+                        <br>
+                        <div style="margin-left:15%">
+                            <h4 class="col-xs-2"> So luong:</h4>
+                            <input class="col-xs-2" onclick="s()" style="margin-left: 15%" type="number" value="1" placeholder="SO LUONG" id="soluong" name="soluong">
+                            <br>
+                        </div>
+
+                        <br>
+                        <div style="margin-left:15%">
+                            <h4 class="col-xs-3"> Thanh tien:</h4>
+                            <h4 class="col-xs-3" id="price" value="">
+                                <%- product.price *1 %>
+                            </h4>
+                            <br>
+                        </div>
+                        <br>
+                        <div style="margin-left: 7%">
+                            <h5 class="col-xs-3">Phuong thuc giao hang</h5>
+                            <h5 class="col-xs-3"><input type="radio" name="gh" value="GHN" checked> GIAO HANG NHANH</h5>
+                            <h5 class="col-xs-3"><input type="radio" name="gh" value="VNPOST"> VNPOST</h5>
+                            <h5 class="col-xs-3"><input type="radio" name="gh" value="GHTK"> GIAO TIET KIEM</h5>
+                        </div>
+                    </div>
+
+
+                    <div class="container">
+                        <% if(user){ %>
+                        <h3>Thong tin khach hang</h3>
+                        <div id="sp1" style="margin-left: 4%">
+                            <div style="margin-left:15%">
+                                <h4 class="col-xs-4">TEN KHACH HANG:</h4>
+                                <h4>
+                                    <%- user.name %>
+                                </h4>
+
+                            </div>
+                            <br>
+                            <div style="margin-left:15%">
+                                <h4 class="col-xs-3">SDT:</h4>
+                                <h4>
+                                    <%- user.phone %>
+                                </h4>
+
+                            </div>
+                            <br>
+
+                            <div style="margin-left:15%">
+                                <h4 class="col-xs-2"> DIA CHI:</h4>
+                                <input class="col-xs-7" onclick="s()" style="margin-left: 15%" type="text" value=""
+                                    placeholder="dia chi" required id="soluong" name="address">
+                                <br>
+                            </div>
+                            <br><br>
+
+                            <div style="margin-left:15%">
+                                <h4 class="col-xs-2"> GHI CHU:</h4>
+                                <input class="col-xs-7" style="margin-left: 15%" type="text" value="" placeholder="Ghi chu"
+                                    id="soluong" name="note">
+                                <br>
+                            </div>
+                            <br><br>
+                            <div style="margin-left: 7%" aria-required="">
+                                <h5 class="col-xs-3">Phuong thuc thanh toan</h5>
+                                <h5 class="col-xs-4"><input type="radio" name="TT" value="COD" checked> Thanh toan khi
+                                    nhan hang</h5>
+                                <h5 class="col-xs-4"><input type="radio" name="TT" value="ATM">Thanh toan bang the
+                                    ATM noi dia</h5>
+
+                            </div>
+                            <br><br><br>
+
+                            <br>
+                            <button type="submit" style="margin-left:45% ">DAT HANG</button>
+                            <br><br>
+                        </div>
+                        <% } else{ %>
+                        <h3 style="color: red">BAN CAN DANG NHAP DE TIEN HANH</h3>
+                        <% } %>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+        <style>
+                .button_page {
+                    background: #a1f750f3;
+                    height: 330px; margin-top: 30px;
+                }
+
+                .b {
+                    margin-top: 20px;
+
+                }
+
+                p {
+                    font-size: 130%;
+                }
+            </style>
+
+            <div class="button_page">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-3 b">
+                    <h4>Gioi thieu ve Bkstore</h4>
+                    <p>Day la du an duoc phat trien tren BTL mon Thiet ke va lap trinh web.Trang web mo phonng
+                        mot trang thuong mai dien tu voi cac chuc nang chinh va chua duoc hoan chinh, moi ddong gop va y kien de
+                        xay dung
+                        trang web tot hon, vui long gui vao email : <a href="">dunguyen20091998@gmail.com</a>
+                    </p>
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-1 b">
+                    <h4>Cac dich vu giao hang</h4>
+                    <img src="http://static.insidev2.ghn.vn/9d146c1c0cd90296cecc32948d24731ebca3b737/assets/images/GHN_Logo.png"
+                        alt="" height="60px"><br><br>
+                    <img src="http://thanhnien.vnpost.vn/static/img/vnpost.png" alt="" height="60px"><br><br><br>
+                    <img src="https://giaohangtietkiem.vn/wp-content/uploads/2015/10/logo.png" height="60px" alt="">
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-1 b">
+                    <h4>Phuong thuc thanh toan</h4>
+                    <img src="https://i2.wp.com/scentfie.com/wp-content/uploads/2017/11/Cash-On-Delivery-Logo.jpg?resize=366%2C144"
+                        alt="" height="60px"><br><br>" <br><br>
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-1 b"><a href="">Bkstore.herokuapp.com</a></div>
+
+            </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<html>
+    <head>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <title>BK Store</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+        <style>
+.toppage{
+    border-radius : 0px 0px 5px 5px;
+    background-color: #7ff114;
+    height:45px;
+
+}
+.toppage_title{
+    padding-top: 1vh;
+    color: aliceblue;
+    font-size: medium;
+}
+.toppage_title:hover{
+    color:#7dbaf3;
+}
+.logo{
+    height: auto;
+    box-shadow: 0px 1px 3px #259915 ;
+
+}
+.search{
+    border-radius: 30px;
+    border: 2px solid #23e60a;
+    height:50px;
+    margin-top: 30px;
+    background-color: #ffffff;
+}
+.search_input{
+    border:0px solid #ffffff;
+    margin-top: 12px;
+    font-size: 130%;
+    width: 80%;
+}
+.button_input{
+    float:right;
+background-color: #ffffff;
+border: 0px solid #ffffff;
+font-size: 150%;
+margin-top: 12px;
+color: #23e60a;
+}
+.a{
+    margin-top: 50px;
+    font-size: 120%;
+}
+
+.b_login{
+    margin-left:30%;
+    border: 2px solid #01f801d8;
+    font-size: 150%;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+background-color: red;
+}
+.input_login{
+    border: 1px solid #4a8ae9;
+    border-radius: 10px;
+    font-size: 150%;
+    margin-left:10%;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+#login1{
+    border: 2px solid #23e60a;
+    border-radius: 20px;
+    margin-top: 15vh;
+    width: 600px
+}
+#u_login,#p_login{
+   height: 20px;
+   margin-top:5px;
+   margin-left:10%;
+  display: none;
+}
+
+        </style>
+
+<script>
+$(document).ready(()=>{
+    $('#user').click(()=>{
+       $('#u_login').show(500);
+       $('#user').removeAttr('placeholder')
+    });
+    $('#pass').click(()=>{
+       $('#p_login').show(500);
+       $('#pass').removeAttr('placeholder')
+    });
+});
+function check(){
+    let user=document.formlogin.user.value;
+    let pass=document.formlogin.pass.value;
+    let userreglux="([0-9]{10})";
+    let passreglux="([a-zA-Z0-9]{6.100})";
+    if(user.length!=10){
+        window.alert("ban sai sdt");
+    }
+    if(pass.length<6){
+        window.alert("mat khau khoong hop le");
+    }
+    else{
+         if(passreglux.match(user)){
+            // window.alert("mat khau khong hop le");
+         }
+         else{
+             window.alert("mat khau ko hop le");
+         }
+    }
+
+}
+</script>
+
+
+
+        <div >
+            <div class="toppage">
+                <div class="col-xs-2"></div>
+           <h6 class="toppage_title col-xs-6">Chao mung ban den voi chung toi</h6>
+           <h6 class="toppage_title col-xs-2" > <a href="/login"> Dang nhap</a></h6>
+           <h6 class="toppage_title col-xs-2" ><a href="/singup"> Dang ky</a></h6>
+            </div>
+            <!-- logo -->
+
+            <div class="logo">
+                <div class="container">
+                    <div class="col-xs-4">
+                        <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/14064080_1219397674759626_7148026115191155953_n.jpg?_nc_cat=109&_nc_ht=scontent.fhan2-3.fna&oh=ca32f16ced2e0f1e2af8ba61bb058d2e&oe=5C877768"width:100px height="200px" >                    </div>
+                    <div class="col-xs-1"></div>
+                    <div class="search col-xs-6 ">
+                        <form action="/product/search" method="post">
+                        <input type="text" name="search" class="search_input" placeholder="    Search any things..."value="" required>
+                        <button type="submit" class="button_input glyphicon glyphicon-search"></button>
+                        </form>
+                        <div>
+                            <a href="/"><h5 class="col-xs-3 a" >Trang chu</h5></a>
+                          <a href="/flashsale">  <h5 class="col-xs-3 a">Flash Sales</h5></a>
+                           <a href="/voucher"> <h5 class="col-xs-3 a">Voucher</h5></a>
+                            <a href="/bkmall"> <h5 class="col-xs-3 a">BK Store Mall</h5></a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+<!--end logo-->
+<!--login-->
+
+<div class="container " >
+          <h1>Thong tin ca nhan</h1>
+
+
+    </body>
+</html>
